@@ -34,9 +34,16 @@ AnswerData:
 
 Response:
     - QuizID-foreignkey(quiz)
-    - userID
+    - userID-Foreignkey(student)
     - Score
 
 
 [{questionID:answerID}.....]for answer in answerobj:
 questionObj= questions.objects.filter(id/pk=questionid)
+
+Apis:
+    -Register Teacher,add the teacher ID to Student[registered teachers]
+    -Get quiz by teacher id 
+    -submit response
+    -get correct answers by quiz id and question ID
+
