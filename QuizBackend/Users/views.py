@@ -3,6 +3,7 @@ from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import status
 from Users.serializer import TeacherSerializer,UserSerializer,BaseUserSerializer,StudentSerializer
+from Users.models import Teacher,Student
 
 
 
@@ -69,3 +70,10 @@ class CreateStudent(APIView):
                 return Response(_baseUser.errors,status=status.HTTP_400_BAD_REQUEST)
         else:
             return Response(_user.errors,status=status.HTTP_400_BAD_REQUEST)
+
+class getTeachers(APIView):
+    def get(self,request):
+        _teachers = Teacher.objects.filter(pk=1)
+        print(_teachers)
+        teachers=TeacherSerializer(_teachers)
+        return Response(teachers.data)
