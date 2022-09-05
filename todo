@@ -1,0 +1,39 @@
+Registration
+Usertypes:
+    Teacher
+    Student
+    
+
+Student Data
+    ID
+    Name
+    enrolledteacherm2m(teacher)
+
+Teacher Data
+    ID
+    Name
+     foreignkey(student)
+   
+
+Quiz Data
+    ID
+    Questions{number:int,question:"",options:[{ID:xyz,mynameisehi}etc]
+    Organizer
+   
+
+questionData:
+    - question
+    - answers[IDs]
+    - QuizID
+
+AnswerData:
+    -IsCorrect? 
+    - QuestionID
+    - Answer
+
+Response:
+    - QuizID
+    - userID
+    - Score
+
+
