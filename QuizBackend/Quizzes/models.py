@@ -2,8 +2,9 @@ from django.db import models
 from Users.models import Teacher,Student
 
 class Quiz(models.Model):
-    Organizer= models.ForeignKey(Teacher, on_delete=models.CASCADE)
-    AllowedStudents=models.ForeignKey(Student, on_delete=models.CASCADE)
+    Quiz_name=models.CharField(max_length=255)
+    Organizer= models.ForeignKey(Teacher, on_delete=models.CASCADE,blank=True)
+    AllowedStudents=models.ForeignKey(Student, on_delete=models.CASCADE,blank=True,default=0)
     
 class Question(models.Model):
     question = models.TextField()
