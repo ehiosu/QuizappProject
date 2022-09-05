@@ -1,5 +1,6 @@
 from django.db import models
 from Users.models import Teacher
+
 class Quiz(models.Model):
     Organizer= models.ForeignKey(Teacher, on_delete=models.CASCADE)
     
