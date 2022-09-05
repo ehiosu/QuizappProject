@@ -1,39 +1,42 @@
 Registration
 Usertypes:
-    Teacher
-    Student
+    Teacher-done
+    Student-done
     
 
 Student Data
-    ID
-    Name
-    enrolledteacherm2m(teacher)
+    ID-done
+    Name-done
+    enrolledteacherm2m(teacher)-done
 
 Teacher Data
-    ID
-    Name
-     foreignkey(student)
+    ID-done
+    Name-done
+   
    
 
 Quiz Data
-    ID
-    Questions{number:int,question:"",options:[{ID:xyz,mynameisehi}etc]
-    Organizer
+    Organizer(TeacherForeignKey)
    
 
 questionData:
     - question
-    - answers[IDs]
-    - QuizID
+    - QuizID-foreignkey(quiz)
+    - ImageField(blank=true)
+    - Imagefield2(blank=true)
+    - Imageurl((blank=True)
 
 AnswerData:
     -IsCorrect? 
     - QuestionID
     - Answer
 
+
 Response:
-    - QuizID
+    - QuizID-foreignkey(quiz)
     - userID
     - Score
 
 
+[{questionID:answerID}.....]for answer in answerobj:
+questionObj= questions.objects.filter(id/pk=questionid)
