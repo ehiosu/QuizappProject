@@ -1,5 +1,5 @@
 {
-"python.pythonPath":"D:\\ehian\\anaconda3\\envs\\mydjangoenv\\python.exe",
+"python.defaultInterpreterPath":"D:\\ehian\\anaconda3\\envs\\mydjangoenv\\python.exe",
 
 "python.terminal.activateEnvironment": true,
 

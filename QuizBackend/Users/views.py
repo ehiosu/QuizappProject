@@ -1,79 +1,43 @@
 from django.shortcuts import render
-from rest_framework.views import APIView
-from rest_framework.response import Response
 from rest_framework import status
-from Users.serializer import TeacherSerializer,UserSerializer,BaseUserSerializer,StudentSerializer
-from Users.models import Teacher,Student
+from rest_framework.response import Response
+from rest_framework.permissions import IsAuthenticated
+from rest_framework.exceptions import AuthenticationFailed
+from django.http import JsonResponse
+import jwt
+import datetime
+from  rest_framework import serializers
+# from rest_framework_simplejwt.tokens import RefreshToken
+from rest_framework.decorators import api_view, permission_classes
 
-
+from Users.serializer import TeacherSerializer,StudentSerializer
+from Users.models import Teacher,User
+from rest_framework.views import APIView
 
 class CreateTeacher(APIView):
     def post(self,request):
-        print(request.data)
-        _user=UserSerializer(data=request.data)
-        
-        #serializer=TeacherSerializer(data=request.data)
-       
-        
-        if _user.is_valid():
-            user=_user.save()
-            user.set_password(user.password)
-            print(user)
-            _baseUser=BaseUserSerializer(data={"user":user.id,"Profile_pic":request.data["Profile_Pic"]})
-            print(_baseUser)
-            if _baseUser.is_valid():
-                baseUser=_baseUser.save()
-                print(baseUser)
-                _teacher=TeacherSerializer(data ={"user":baseUser.id})
-                if _teacher.is_valid():
-                    teacher=_teacher.save()
-                    print(teacher)
-                    print("user above me")
-                    return Response(status=status.HTTP_200_OK)
-                else:
-                    print("teacher invalid")
-                    baseUser.delete()
-                    user.delete()
-                    return Response(status=status.HTTP_400_BAD_REQUEST)
-            else:
-                print("base user invalid")
-                user.delete()
-                return Response(_baseUser.errors,status=status.HTTP_400_BAD_REQUEST)
+        teacher=TeacherSerializer(data=request.data)
+        if teacher.is_valid():
+            teacher.save()
+            return Response(status=status.HTTP_200_OK)
         else:
-            return Response(_user.errors,status=status.HTTP_400_BAD_REQUEST)
-
+            return Response(teacher.errors,status=status.HTTP_400_BAD_REQUEST)
 # Create your views here.
+
 class CreateStudent(APIView):
-     def post(self,request):
-        _user=UserSerializer(data=request.data)    
-        if _user.is_valid():
-            user=_user.save()
-            user.set_password(user.password)
-            print(user)
-            _baseUser=BaseUserSerializer(data={"user":user.id,"Profile_pic":request.data["Profile_Pic"]})
-            print(_baseUser)
-            if _baseUser.is_valid():
-                baseUser=_baseUser.save()
-                print(baseUser)
-                _student=StudentSerializer(data ={"user":baseUser.id})
-                if _student.is_valid():
-                    student=_student.save()
-                    return Response(status=status.HTTP_200_OK)
-                else:
-                    print("teacher invalid")
-                    baseUser.delete()
-                    user.delete()
-                    return Response(status=status.HTTP_400_BAD_REQUEST)
-            else:
-                print("base user invalid")
-                user.delete()
-                return Response(_baseUser.errors,status=status.HTTP_400_BAD_REQUEST)
+    def post(self,request):
+        student=StudentSerializer(data=request.data)
+        print(student)
+        if student.is_valid():
+            student.save()
+            return Response(status=status.HTTP_200_OK)
         else:
-            return Response(_user.errors,status=status.HTTP_400_BAD_REQUEST)
+            return Response(student.errors,status=status.HTTP_400_BAD_REQUEST)
 
 class getTeachers(APIView):
     def get(self,request):
-        _teachers = Teacher.objects.filter(pk=1)
-        print(_teachers)
-        teachers=TeacherSerializer(_teachers)
-        return Response(teachers.data)
+        
+        users=User.objects.filter(role=User.Role.TEACHER).values('id','username','email')
+        
+        
+        return  JsonResponse({"data":list(users)})
