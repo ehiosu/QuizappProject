@@ -1,8 +1,9 @@
 from django.db import models
-from Users.models import Teacher
+from Users.models import Teacher,Student
 
 class Quiz(models.Model):
     Organizer= models.ForeignKey(Teacher, on_delete=models.CASCADE)
+    AllowedStudents=models.ForeignKey(Student, on_delete=models.CASCADE)
     
 class Question(models.Model):
     question = models.TextField()
