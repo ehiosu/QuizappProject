@@ -1,20 +1,18 @@
 from django.db import models
-from Users.models import Teacher,Student
+from Users.models import Teacher,Student,User
 
 class Quiz(models.Model):
-    Quiz_name=models.CharField(max_length=255,unique=True)
-    Organizer= models.ForeignKey(Teacher, on_delete=models.CASCADE,blank=True)
+    Name=models.CharField(max_length=255,unique=True)
+    teacher=models.ForeignKey(User, on_delete=models.CASCADE,default="15")
+    
    
     
 class Question(models.Model):
-    question = models.TextField()
-    quiz_id = models.ForeignKey(Quiz,on_delete=models.CASCADE)
-    Image1 = models.URLField(blank=True)
-    Image2 = models.URLField(blank=True)
-    Image3 = models.URLField(blank=True)
-
-    def __str__(self):
-        return self.question
+    question=models.TextField(max_length=500)
+    Quiz=models.ForeignKey(User, on_delete=models.CASCADE,default="1")
+    image1=models.URLField(null=True)
+    image2=models.URLField(null=True)
+    image3=models.URLField(null=True)
 
 class Answer(models.Model):
     IsCorrect= models.BooleanField()
