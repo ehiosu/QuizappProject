@@ -3,3 +3,18 @@ from Quizzes.models import Quiz,Answer,Question
 
 
 
+class QuizSerializer(serializers.ModelSerializer):
+    class Meta:
+        model=Quiz
+        fields="__all__"
+
+class AnswerSerializer(serializers.ModelSerializer):
+    class Meta:
+        model=Answer
+        fields="__all__"
+class QuestionSerializer(serializers.ModelSerializer):
+    class Meta:
+        model=Question
+        fields="__all__"
+
+
