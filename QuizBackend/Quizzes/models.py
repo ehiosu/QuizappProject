@@ -9,18 +9,23 @@ class Quiz(models.Model):
     
 class Question(models.Model):
     question=models.TextField(max_length=500)
-    Quiz=models.ForeignKey(User, on_delete=models.CASCADE,default="1")
-    image1=models.URLField(null=True)
-    image2=models.URLField(null=True)
-    image3=models.URLField(null=True)
+    Quiz=models.ForeignKey(Quiz, on_delete=models.CASCADE,default="1")
+    image1=models.URLField(blank=True,null=True)
+    image2=models.URLField(blank=True,null=True)
+    image3=models.URLField(blank=True,null=True)
 
 class Answer(models.Model):
     IsCorrect= models.BooleanField()
     QuestionID=models.ForeignKey(Question, on_delete=models.CASCADE)
-    Answer=models.TextField(max_length=500)
+    answer=models.TextField(max_length=500)
 
     def __str__(self):
         return self.Answer
+
+class response(models.Model):
+    student=models.ForeignKey(Student, on_delete=models.CASCADE)
+    score=models.CharField(max_length=10)
+    quiz=models.ForeignKey(Quiz, on_delete=models.SET_NULL,null=True,blank=True)
     
 
 

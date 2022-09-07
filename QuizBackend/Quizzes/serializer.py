@@ -1,5 +1,5 @@
 from  rest_framework import serializers
-from Quizzes.models import Quiz,Answer,Question
+from Quizzes.models import Quiz,Answer,Question,response
 
 
 
@@ -12,12 +12,15 @@ class AnswerSerializer(serializers.ModelSerializer):
     class Meta:
         model=Answer
         fields= "__all__"
-        depth = 1
+        
         
 class QuestionSerializer(serializers.ModelSerializer):
     class Meta:
         model=Question
         fields="__all__"
         depth = 1
-
+class ResponseSerializer(serializers.ModelSerializer):
+    class Meta:
+        model=response
+        fields="__all__"
 
