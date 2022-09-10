@@ -1,9 +1,13 @@
 {
-"python.defaultInterpreterPath":"D:\\ehian\\anaconda3\\envs\\mydjangoenv\\python.exe",
+  "python.defaultInterpreterPath": "D:\\ehian\\anaconda3\\envs\\mydjangoenv\\python.exe",
 
-"python.terminal.activateEnvironment": true,
+  "python.terminal.activateEnvironment": true,
 
-    "editor.formatOnSave": true,
-    "editor.defaultFormatter": "SimonSiefke.prettier-vscode"
-  
+  "editor.formatOnSave": true,
+  "editor.defaultFormatter": "SimonSiefke.prettier-vscode",
+  "files.associations": {
+    "*.react.js": "javascriptreact",
+    "*.jsx": "javascriptreact",
+    "*.js": "javascriptreact"
+  }
 }
