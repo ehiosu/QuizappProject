@@ -20,7 +20,7 @@ class Answer(models.Model):
     answer=models.TextField(max_length=500)
 
     def __str__(self):
-        return self.Answer
+        return self.answer
 
 class response(models.Model):
     student=models.ForeignKey(Student, on_delete=models.CASCADE)
