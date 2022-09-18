@@ -340,7 +340,7 @@ class Login(APIView):
         email = request.data['username']
         password = request.data['password']
 
-        user = User.objects.filter(username=email).first()
+        user = User.objects.filter(username=email).first() 
 
         if user is None:
             raise AuthenticationFailed('User not found!')
@@ -351,9 +351,13 @@ class Login(APIView):
         payload = {
             'id': user.id,
             'exp': datetime.datetime.utcnow() + datetime.timedelta(minutes=60),
-            'iat': datetime.datetime.utcnow()
+            'iat': datetime.datetime.utcnow(),
+            "username":user.username,
+            "first_name":user.first_name,
+            "last_name":user.last_name,
+            "role":user.role
         }
-
+        print(payload)
         token = jwt.encode(payload, 'secret', algorithm='HS256')
 
         response = Response()
@@ -362,6 +366,7 @@ class Login(APIView):
         response.data = {
             'jwt': token
         }
+        
         return response
     
 class Logout(APIView):

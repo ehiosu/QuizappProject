@@ -1,0 +1,180 @@
+.sidebar {
+  background-color: rgba(56, 62, 61, 0.3);
+  height: 100%;
+  margin: 0;
+}
+
+.landing-container {
+  height: 100vh;
+  display: flex;
+  flex-direction: row;
+}
+.landing-container {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.sidebar {
+  background: rgb(253, 250, 250);
+  height: 100vh;
+  color: black;
+}
+
+.top_section {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 15px 30px;
+}
+.sidebar-container .brand {
+}
+.sidebar-container .bars {
+}
+
+.routes {
+  position: relative;
+  top: 25%;
+  gap: 10px;
+}
+
+.link {
+  display: flex;
+  text-decoration: none;
+  color: rgba(128, 128, 128, 1);
+  height: 50px;
+  align-items: center;
+  font-size: 1.2rem;
+  margin: 10px 0 5px;
+  padding: 5px 10px;
+}
+.link .icon {
+  flex: 35%;
+  display: grid;
+  place-items: center;
+}
+
+.link .text {
+  flex: 65%;
+}
+.link:hover {
+  transition: 0.3s;
+  font-weight: 700;
+  background-color: hsla(254, 21%, 76%, 0.2);
+  border-radius: 22px;
+  width: 90%;
+  margin-left: 4%;
+  color: black;
+}
+
+.link.active {
+  transition: 0.5s;
+  color: #645da5;
+  background-color: hsla(254, 21%, 76%, 0.27);
+  border-right: 5px solid #645da5;
+  border-top-right-radius: 10px;
+  margin-left: 4%;
+  font-weight: 700;
+}
+
+.link.link.active:hover {
+  color: #645da5;
+  background-color: hsla(254, 21%, 76%, 0.2);
+  border-right: 5px solid #645da5;
+  border-top-right-radius: 10px;
+  width: 100%;
+  margin-left: 0;
+  border-top-left-radius: 0;
+  border-bottom-left-radius: 0;
+  border-bottom-right-radius: 0;
+}
+
+.sidebar .avatar {
+  margin-top: 20px;
+  margin-left: 20px;
+}
+.main-section {
+  width: 50vw;
+  padding: 2rem;
+  border-right: 2px solid hsla(254, 21%, 76%, 0.27);
+  overflow-y: scroll;
+}
+.main-section .profile-section {
+  display: flex;
+  flex-direction: row;
+  gap: 20px;
+}
+
+.main-section .profile-section .inner-text {
+  align-self: center;
+  font-weight: 600;
+  color: #645da5;
+}
+
+.main-section .profile-section .search {
+  margin-left: auto;
+  font-size: 1.2rem;
+  display: flex;
+}
+
+.main-section .profile-section .search input {
+  width: 250px;
+  height: 40px;
+  background-color: rgba(128, 128, 128, 0.1);
+  border-top-left-radius: 10px;
+  border-bottom-left-radius: 10px;
+  border: none;
+  padding: 10px;
+}
+.main-section .profile-section .search input:focus {
+  outline: none;
+  padding: 10px;
+  font-size: 1rem;
+}
+.main-section .profile-section .search .icon {
+  background-color: #645da5;
+  color: white;
+  font-size: 2.4rem;
+  padding: 5px;
+}
+
+.main-section .room-section {
+  margin-top: 20%;
+}
+
+.room-container {
+  display: flex;
+  width: 100%;
+  border: 2px solid hsla(254, 21%, 76%, 0.67);
+  height: 200px;
+  margin: 20px 0px 20px;
+  overflow: hidden;
+}
+
+.room-container .room-name {
+  font-weight: 400;
+}
+
+.room-container .text-info {
+  display: flex;
+  flex-direction: column;
+  justify-content: start;
+  align-items: center;
+  padding: 20px;
+  color: #645da5;
+}
+
+.room-container .text-info .organizer {
+  display: flex;
+  gap: 10px;
+  margin-right: auto;
+  font-weight: 600;
+  font-size: 1.2rem;
+  margin: 10px 0px 10px;
+  margin-right: auto;
+  color: rgba(128, 128, 128, 0.3);
+}
+
+.room-container .text-info .organizer .icon {
+  align-self: center;
+}

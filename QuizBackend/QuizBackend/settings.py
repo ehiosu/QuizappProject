@@ -28,8 +28,15 @@ DEBUG = True
 
 ALLOWED_HOSTS = []
 
+CORS_ORIGIN_WHITELIST=[
+    'http://localhost:3000'
+]
 
+CORS_ORGIGIN_ALLOW_ALL=True
 # Application definition
+CORS_ALLOWED_ORIGINS = [
+    'http://localhost:3000',
+]
 
 INSTALLED_APPS = [
     "django.contrib.admin",
@@ -41,6 +48,8 @@ INSTALLED_APPS = [
     "Users",
     "Quizzes",
     "rest_framework",
+    "rest_framework_simplejwt.token_blacklist",
+    "corsheaders"
 ]
 REST_FRAMEWORK={
     'DEFAULT_AUTHENTICATION_CLASSES':[
@@ -55,6 +64,7 @@ MIDDLEWARE = [
     "django.contrib.auth.middleware.AuthenticationMiddleware",
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
+    'corsheaders.middleware.CorsMiddleware',
 ]
 
 ROOT_URLCONF = "QuizBackend.urls"
@@ -136,8 +146,8 @@ PASSWORD_HASHERS = [
 SIMPLE_JWT = {
     'ACCESS_TOKEN_LIFETIME': timedelta(minutes=60),
     'REFRESH_TOKEN_LIFETIME': timedelta(minutes=60),
-    'ROTATE_REFRESH_TOKENS': False,
-    'BLACKLIST_AFTER_ROTATION': False,
+    'ROTATE_REFRESH_TOKENS': True,
+    'BLACKLIST_AFTER_ROTATION': True,
     'UPDATE_LAST_LOGIN': False,
 
     'ALGORITHM': 'HS256',

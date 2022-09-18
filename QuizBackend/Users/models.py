@@ -38,7 +38,6 @@ class Teacher(User):
         proxy:True
 class Student(User):
     base_role=User.Role.STUDENT
-    Teachers= models.ManyToManyField(Teacher,blank=True)
 
 class StudentManager(UserManager):
      def get_queryset(self,*args,**kwargs):
@@ -46,4 +45,13 @@ class StudentManager(UserManager):
         return result.filter(role=User.Role.STUDENT)
 
 
+class Room(models.Model):
+    RoomName=models.CharField(max_length=250)
+    RoomDescription=models.TextField(max_length=1000)
+    Owner=models.OneToOneField(Teacher,  on_delete=models.CASCADE)
+    Students=models.ManyToManyField(Student)
+
+    def __str__(self):
+        return self.RoomName
+    
 # Create your models here.

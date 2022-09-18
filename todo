@@ -1,49 +1,56 @@
-Registration
+Registration @done
 Usertypes:
-    Teacher-done
-    Student-done
+    Teacher-done @done
+    Student-done @done
     
 
-Student Data
-    ID-done
-    Name-done
-    enrolledteacherm2m(teacher)-done
+Student Data @done
+    ID-done @done
+    Name-done @done
+    enrolledteacherm2m(teacher)-done @done
 
-Teacher Data
-    ID-done
-    Name-done
+Teacher Data @done
+    ID-done @done
+    Name-done @done
    
    
 
-Quiz Data
-    Organizer(TeacherForeignKey)
+Quiz Data @done
+    Organizer(TeacherForeignKey) @done
    
 
 questionData:
-    - question
-    - QuizID-foreignkey(quiz)
-    - ImageField(blank=true)
-    - Imagefield2(blank=true)
-    - Imageurl((blank=True)
+    - question @done
+    - QuizID-foreignkey(quiz) @done
+    - ImageField(blank=true) @done
+    - Imagefield2(blank=true) @done
+    - Imageurl((blank=True) @done
 
 AnswerData:
-    -IsCorrect? 
-    - QuestionID
-    - Answer
+    -IsCorrect? @done
+    - QuestionID @done
+    - Answer @done
 
 
 Response:
-    - QuizID-foreignkey(quiz)
-    - userID-Foreignkey(student)
-    - Score
+    - QuizID-foreignkey(quiz) @done
+    - userID-Foreignkey(student) @done
+    - Score @done
 
 
-[{questionID:answerID}.....]for answer in answerobj:
-questionObj= questions.objects.filter(id/pk=questionid)
+[{questionID:answerID}.....]for answer in answerobj: @done
+questionObj= questions.objects.filter(id/pk=questionid) @done
 
 Apis:
-    -Register Teacher,add the teacher ID to Student[registered teachers]
-    -Get quiz by teacher id 
-    -submit response
-    -get correct answers by quiz id and question ID
+    -Register Teacher,add the teacher ID to Student[registered teachers] @done
+    -Get quiz by teacher id @done
+    -submit response @done
+    -get correct answers by quiz id and question ID @done
+
+
+Make Rooms @done
+Allow registration of rooms
+Rooms is sort of replace classes 
+Rooms can have quizes(fk)
+Rooms should have students and 1 teacher so 1-1
 

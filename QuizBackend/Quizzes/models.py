@@ -1,5 +1,5 @@
 from django.db import models
-from Users.models import Teacher,Student,User
+from Users.models import Teacher,Student,User,Room
 
 class Quiz(models.Model):
     Name=models.CharField(max_length=255,unique=True)

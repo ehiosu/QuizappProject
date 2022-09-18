@@ -4,14 +4,21 @@ import './index.css'
 
 import reportWebVitals from './reportWebVitals'
 import { HomePage } from './HomePage'
+import { Landing } from './Landing'
+import { AuthProvider } from './context/Authcontext'
+
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
 const root = ReactDOM.createRoot(document.getElementById('root'))
 root.render(
   <React.StrictMode>
     <BrowserRouter>
-      <Routes>
-        <Route path="/" element={<HomePage />}></Route>
-      </Routes>
+      <AuthProvider>
+        <Routes>
+          <Route path="/" element={<HomePage />}></Route>
+          <Route path="/Home" element={<Landing />}></Route>
+          <Route path="/Chat" element={<Landing />}></Route>
+        </Routes>
+      </AuthProvider>
     </BrowserRouter>
   </React.StrictMode>,
 )
