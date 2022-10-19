@@ -10,7 +10,7 @@ class User(AbstractUser):
     base_role=Role.ADMIN
 
     role=models.CharField(max_length=50,choices=Role.choices,blank=True)
-   
+    profile=models.TextField(max_length=1000,blank=True)
 
 
     def save(self,*arg,**kwargs):
@@ -38,7 +38,7 @@ class Teacher(User):
         proxy:True
 class Student(User):
     base_role=User.Role.STUDENT
-
+    Teachers = models.ManyToManyField(Teacher)
 class StudentManager(UserManager):
      def get_queryset(self,*args,**kwargs):
         result = super().get_queryset(*args,**kwargs)

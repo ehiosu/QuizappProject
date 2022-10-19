@@ -1,6 +1,7 @@
 import React from 'react'
 import { useState, useEffect, useContext } from 'react'
-import svg from './/undraw_content_team_re_6rlg.svg'
+// import svg from './undraw_content_team_re_6rlg.svg'
+import svg from './undraw_good_team_re_hrvm.svg'
 import loginimg from './undraw_reminder_re_fe15.svg'
 import { useNavigate } from 'react-router-dom'
 import AuthContext from './context/Authcontext'
@@ -11,7 +12,7 @@ export const HomePage = () => {
   let { login, authtoken } = useContext(AuthContext)
 
   const OpenSignUpPage = () => {
-    const container = document.querySelector('.container')
+    const container = document.querySelector('.Container')
 
     if (container.classList.contains('loginmode')) {
       container.classList.remove('loginmode')
@@ -20,7 +21,7 @@ export const HomePage = () => {
     container.classList.add('signupmode')
   }
   const OpenLoginPage = () => {
-    const container = document.querySelector('.container')
+    const container = document.querySelector('.Container')
     if (container.classList.contains('signupmode')) {
       container.classList.remove('signupmode')
       container.classList.add('loginmode')
@@ -50,7 +51,7 @@ export const HomePage = () => {
     }
   }
   return (
-    <div className="container">
+    <div className="Container">
       <div>
         <div className="forms-container">
           <div className="signin-signup">

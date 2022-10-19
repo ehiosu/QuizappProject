@@ -27,10 +27,6 @@
   align-items: center;
   padding: 15px 30px;
 }
-.sidebar-container .brand {
-}
-.sidebar-container .bars {
-}
 
 .routes {
   position: relative;
@@ -149,6 +145,8 @@
   height: 200px;
   margin: 20px 0px 20px;
   overflow: hidden;
+  flex-direction: row;
+  justify-content: start;
 }
 
 .room-container .room-name {
@@ -162,6 +160,7 @@
   align-items: center;
   padding: 20px;
   color: #645da5;
+  width: 100%;
 }
 
 .room-container .text-info .organizer {
@@ -177,4 +176,72 @@
 
 .room-container .text-info .organizer .icon {
   align-self: center;
+}
+
+.room-img{
+ margin-bottom: 20px;
+}
+
+.bottom-panel{
+  margin-top: auto;
+  margin-left: auto;
+  justify-self: end;
+}
+.room-name{
+  margin-right: auto;
+}
+
+.bottom-panel .btn{
+  background-color: hsla(254, 21%, 76%, 0.27)
+}
+
+.bottom-panel .btn:hover{
+  background-color: hsla(254, 21%, 76%, 1);
+
+  transition: 1s;
+}
+
+.score-container{
+background-color:hsla(254, 21%, 76%, 0.3) ;
+font-weight: 300;
+border-radius: 10px 10px 0px 0px;
+
+
+}
+
+.container-fluid{
+  padding-left: 0;
+
+}
+.scores-section{
+  height: 100vh;
+  overflow-y: scroll;
+
+}
+
+.profile-section-resp{
+  display: flex;
+  flex-direction: row;
+  gap: 20px;
+
+}
+
+.inner-text{
+  align-self: center;
+  font-weight: 600;
+  color: #645da5;
+  display: flex;
+  justify-content: center;
+}
+.search{
+  margin-left: auto;
+  font-size: 1.2rem;
+  display: flex;
+  margin-left: 140px;
+}
+.search .icon {
+  background-color: #645da5;
+  color: white;
+  font-size: 2.4rem;
+  padding: 5px;
 }

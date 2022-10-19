@@ -149,7 +149,7 @@ class StudentRegistrationSerializer(serializers.ModelSerializer):
 class UserProfileSerializer(serializers.ModelSerializer):
     class Meta:
         model=User
-        fields=["email","username","first_name","last_name","id"]
+        fields=["email","username","first_name","last_name","id","profile"]
 
 class StudentProfileSerializer(serializers.ModelSerializer):
     class Meta:

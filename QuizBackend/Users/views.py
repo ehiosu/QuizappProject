@@ -1,6 +1,7 @@
 from django.shortcuts import render
 from rest_framework.permissions import IsAuthenticated
 from rest_framework_simplejwt.authentication import JWTAuthentication
+from rest_framework.authentication import get_authorization_header
 from rest_framework import status,generics
 from rest_framework.response import Response
 from rest_framework.permissions import IsAuthenticated
@@ -10,6 +11,7 @@ import jwt
 from rest_framework_simplejwt import authentication
 import datetime
 import uuid
+from rest_framework.authentication import SessionAuthentication, BasicAuthentication
 from  rest_framework import serializers
 from rest_framework_simplejwt.tokens import RefreshToken,AccessToken
 from rest_framework.decorators import api_view, permission_classes
@@ -40,8 +42,8 @@ class CreateStudent(APIView):
             return Response(student.errors,status=status.HTTP_400_BAD_REQUEST)
 
 class getTeachers(APIView):
-    def get(self,request):
-        token = request.COOKIES.get('jwt')
+    def post(self,request):
+        token = request.data['token']
         if not token:
             print("not token")
             raise AuthenticationFailed('Unauthenticated')
@@ -52,7 +54,7 @@ class getTeachers(APIView):
         except:
             raise AuthenticationFailed('Unauthenticated')
 
-        users=User.objects.filter(role=User.Role.TEACHER).values('id','username','email')
+        users=User.objects.filter(role=User.Role.TEACHER).values('id','username','email',"profile")
         return  JsonResponse({"data":list(users)})
 
 class CreateQuiz(APIView):
@@ -85,16 +87,16 @@ class CreateQuiz(APIView):
           
 class getQuizById(APIView):
     def get(self,request,pk):
-        token = request.COOKIES.get('jwt')
-        if not token:
-            print("not token")
-            raise AuthenticationFailed('Unauthenticated')
-        try:
-            payload =jwt.decode(token,'secret',algorithms=['HS256'])
-            print(payload)
+       
+        # if not token:
+        #     print("not token")
+        #     raise AuthenticationFailed('Unauthenticated')
+        # try:
+        #     payload =jwt.decode(token,'secret',algorithms=['HS256'])
+        #     print(payload)
            
-        except:
-            raise AuthenticationFailed('Unauthenticated')
+        # except:
+        #     raise AuthenticationFailed('Unauthenticated')
         result =Quiz.objects.filter(teacher=pk).values()
         data=[]
        
@@ -268,15 +270,15 @@ class SubmitQuiz(APIView):
 
 class getResposesForQuizT(APIView):
     def get(self,request,id):
-         token = request.COOKIES.get('jwt')
-         if not token:
-            print("not token")
-            raise AuthenticationFailed('Unauthenticated')
-         try:
-            payload =jwt.decode(token,'secret',algorithms=['HS256'])
+        #  token = request.COOKIES.get('jwt')
+        #  if not token:
+        #     print("not token")
+        #     raise AuthenticationFailed('Unauthenticated')
+        #  try:
+        #     payload =jwt.decode(token,'secret',algorithms=['HS256'])
           
-         except:
-            raise AuthenticationFailed('Unauthenticated')
+        #  except:
+        #     raise AuthenticationFailed('Unauthenticated')
          users=response.objects.filter(quiz=id).values()
        
          _response=[]
@@ -379,7 +381,7 @@ class Logout(APIView):
         return resp
 class enroll(APIView):
     def put(self,request):
-        token = request.COOKIES.get('jwt')
+        token = request.data['token']
         if not token:
             print("not token")
             raise AuthenticationFailed('Unauthenticated')
@@ -401,15 +403,20 @@ class enroll(APIView):
                     print("Teacher Object")
                     user.Teachers.add(teacherobj)
             user.save()
-        
+            teachers=user.values("Teachers")
             return Response(data={"teachers":teachers},status=status.HTTP_202_ACCEPTED)
         else:
             return Response(status=status.HTTP_400_BAD_REQUEST)
 
 
 class GetEnrolledTeeachers(APIView):
-    def get(self,request):
-         token = request.COOKIES.get('jwt')
+
+    def post(self,request):
+        
+         token=request.data['token']
+         
+        #  print(header)
+        #  print("header above")
          if not token:
             print("not token")
             raise AuthenticationFailed('Unauthenticated')
@@ -419,6 +426,7 @@ class GetEnrolledTeeachers(APIView):
            
          except:
             raise AuthenticationFailed('Unauthenticated')
+         print(payload)
          user = payload['id']
          user= Student.objects.get(id=user) 
          Teachers=studentteacherserializer(user).data["Teachers"]
@@ -431,6 +439,13 @@ class GetEnrolledTeeachers(APIView):
 
                 return Response(data={"Teachers":teachers},status=status.HTTP_200_OK)
          else:
-             return Response(status=status.HTTP_400_BAD_REQUEST)
+             return Response(data={"user":token},status=status.HTTP_400_BAD_REQUEST)
 
 
+class GetQuizByQuizId(APIView):
+    def get(self,request,id):
+        result = Quiz.objects.filter(id=id).values()
+        if result:
+            return Response(data={"Quiz":result},status=status.HTTP_200_OK)
+        else:
+            return Response(data={"Quiz":[]},status=status.HTTP_404_NOT_FOUND)
